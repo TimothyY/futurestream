@@ -84,26 +84,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           itemCount: snapshotStreamUsers.data!.length,
                           separatorBuilder: (BuildContext context, int index) => const Divider(),
                           itemBuilder: (BuildContext context, int index) {
-                            return Container(
-                              height: 50,
-                              color: Colors.amber[100],
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Center(child: Text('User '+snapshotStreamUsers.data![index].id.toString())),
-                                  Center(child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                    crossAxisAlignment: CrossAxisAlignment.center,
-                                    children: [
-                                      rank1Button(snapshotStreamUsers.data![index]),
-                                      rank2Button(snapshotStreamUsers.data![index]),
-                                      rank3Button(snapshotStreamUsers.data![index]),
-                                    ],
-                                  )),
-                                ],
-                              ),
-                            );
+                            return _buildUserCard(snapshotStreamUsers.data![index]);
                           }
                       ),
                     );
@@ -134,6 +115,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
   }
+
 
   Widget rank1Button(User user){
     if(user.rank==1){
@@ -175,5 +157,28 @@ class _MyHomePageState extends State<MyHomePage> {
         },
       );
     }
+  }
+
+  Widget _buildUserCard(User user) {
+    return Container(
+      height: 50,
+      color: Colors.amber[100],
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Center(child: Text('User '+user.id.toString())),
+          Center(child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              rank1Button(user),
+              rank2Button(user),
+              rank3Button(user),
+            ],
+          )),
+        ],
+      ),
+    );
   }
 }
